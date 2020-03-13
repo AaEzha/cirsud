@@ -31,8 +31,8 @@
                 <select id="aktifitas" name="aktifitas" class="form-control select2" style="width: 100%;">
                   <option value="1">Perbaikan</option>
                   <option value="2">Maintenance</option>
-                  <option>Petugas</option>
-                  <option>Pending Petugas</option>
+                  <option value="3">Petugas</option>
+                  <option value="4">Pending Petugas</option>
                 </select>
                 <!-- /.form-group -->
               </div>
@@ -83,7 +83,7 @@
 			    		<td rowspan="2">Status</td>
 			    	</tr>
 			    	<tr class="bg-success">
-			    		<td>ruangan</td>
+			    		<td>Ruangan</td>
 			    		<td>Sarana</td>
 			    	</tr>
 
@@ -95,8 +95,8 @@
 			    		<td><?=date_indo($data->waktu);?></td>
 			    		<td><?=$data->area_ruangan;?></td>
 			    		<td><?=$data->nama_aset;?></td>
-			    		<td>petugas</td>
-			    		<td>waktu</td>
+			    		<td><?=$data->petugas;?></td>
+			    		<td><?=date_indo($data->tanggaltindakan);?></td>
 			    		<td><?=$data->status;?></td>
 			    	</tr>
 

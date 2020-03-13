@@ -58,3 +58,5 @@ $route['adminpusat/backup/(:any)'] = 'adminpusat/backup';
 
 $route['adminunit'] = 'adminunit/dashboard';
 $route['adminunit/backup/(:any)'] = 'adminunit/backup';
+
+$route['csunitit'] = 'csunitit/dashboard';

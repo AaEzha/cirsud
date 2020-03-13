@@ -49,31 +49,77 @@ class M_unit extends CI_Model {
 	public function cari($unit='2', $aktifitas='1')
 	{
 		$query ="
-		SELECT  troubleshooting_tickets.ticket_date AS Tanggal,
-        troubleshooting_tickets.id_ticket_register AS Tiket,
-        troubleshooting_tickets.unit_id AS Unit,
-        troubleshooting_tickets.ticket_date AS Waktu,
-        room_categories.name AS Ruangan,
-        asset_products.id_asset_register AS ID_Aset,
-        asset_products.name AS Nama_Aset,
-        room_areas.name AS Area_Ruangan,
-        room_details.name AS Detail_Ruangan,
-        troubleshooting_status.name AS Status
-FROM    troubleshooting_tickets,
-	    troubleshooting_status,
-        troubleshootings,
-        room_details,
-        room_categories,
-        room_areas,
-        asset_products
-WHERE   troubleshooting_tickets.roomcategory_id = room_categories.id AND
-        troubleshooting_tickets.roomdetail_id = room_details.id AND
-        troubleshooting_tickets.troubleshootingstatus_id = troubleshooting_status.id AND
-        troubleshooting_tickets.troubleshootingtype_id = '$aktifitas' AND
-        troubleshooting_tickets.unit_id = '$unit' AND
-        troubleshootings.troubleshootingticket_id = troubleshooting_tickets.id AND
-        troubleshootings.assetproduct_id = asset_products.id AND
-        room_details.roomarea_id = room_areas.id
+					SELECT  troubleshooting_tickets.ticket_date AS Tanggal,
+			        troubleshooting_tickets.id_ticket_register AS Tiket,
+			        troubleshooting_tickets.unit_id AS Unit,
+			        troubleshooting_tickets.ticket_date AS Waktu,
+			        room_categories.name AS Ruangan,
+			        asset_products.id_asset_register AS ID_Aset,
+			        asset_products.name AS Nama_Aset,
+			        room_areas.name AS Area_Ruangan,
+			        room_details.name AS Detail_Ruangan,
+			        troubleshooting_status.name AS Status,
+			        user_accounts.name AS Petugas,
+			        troubleshootings.process_date AS TanggalTindakan,
+			        troubleshootings.solving_date AS TanggalTindakanSelesai
+			FROM    troubleshooting_tickets,
+				    troubleshooting_status,
+			        troubleshootings,
+			        room_details,
+			        room_categories,
+			        room_areas,
+			        asset_products,
+			        user_accounts,
+			        user_admin
+			WHERE   troubleshooting_tickets.roomcategory_id = room_categories.id AND
+			        troubleshooting_tickets.roomdetail_id = room_details.id AND
+			        troubleshooting_tickets.troubleshootingstatus_id = troubleshooting_status.id AND
+			        troubleshooting_tickets.troubleshootingtype_id = '$aktifitas' AND
+			        troubleshooting_tickets.unit_id = '$unit' AND
+			        troubleshootings.troubleshootingticket_id = troubleshooting_tickets.id AND
+			        troubleshootings.assetproduct_id = asset_products.id AND
+			        troubleshootings.useradmin_id = user_admin.id AND
+			        user_admin.useraccount_id = user_accounts.id AND
+			        room_details.roomarea_id = room_areas.id
+		";
+
+		return $this->db->query($query)->result();
+	}
+
+	public function cari2($unit='2')
+	{
+		$query ="
+					SELECT  troubleshooting_tickets.ticket_date AS Tanggal,
+			        troubleshooting_tickets.id_ticket_register AS Tiket,
+			        troubleshooting_tickets.unit_id AS Unit,
+			        troubleshooting_tickets.ticket_date AS Waktu,
+			        room_categories.name AS Ruangan,
+			        asset_products.id_asset_register AS ID_Aset,
+			        asset_products.name AS Nama_Aset,
+			        room_areas.name AS Area_Ruangan,
+			        room_details.name AS Detail_Ruangan,
+			        troubleshooting_status.name AS Status,
+			        user_accounts.name AS Petugas,
+			        troubleshootings.process_date AS TanggalTindakan,
+			        troubleshootings.solving_date AS TanggalTindakanSelesai
+			FROM    troubleshooting_tickets,
+				    troubleshooting_status,
+			        troubleshootings,
+			        room_details,
+			        room_categories,
+			        room_areas,
+			        asset_products,
+			        user_accounts,
+			        user_admin
+			WHERE   troubleshooting_tickets.roomcategory_id = room_categories.id AND
+			        troubleshooting_tickets.roomdetail_id = room_details.id AND
+			        troubleshooting_tickets.troubleshootingstatus_id = troubleshooting_status.id AND
+			        troubleshooting_tickets.unit_id = '$unit' AND
+			        troubleshootings.troubleshootingticket_id = troubleshooting_tickets.id AND
+			        troubleshootings.assetproduct_id = asset_products.id AND
+			        troubleshootings.useradmin_id = user_admin.id AND
+			        user_admin.useraccount_id = user_accounts.id AND
+			        room_details.roomarea_id = room_areas.id
 		";
 
 		return $this->db->query($query)->result();

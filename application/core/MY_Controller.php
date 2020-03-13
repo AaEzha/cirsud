@@ -45,7 +45,7 @@ class MY_Controller extends MX_Controller
 					$role = 3;
 					break;
 
-				case 'customerservice':
+				case 'csunitit':
 					$role = 4;
 					break;
 				

@@ -20,6 +20,14 @@ class Unit extends MY_Controller {
 			$hal = 'unit/index';
 			$teks = 'Perbaikan';
 			$unit = 'IT';
+			$data = [
+				'title' => 'Aktifitas Unit',
+				'hal' => $hal,
+				'units' => $this->munit->data(),
+				'datas' => $data,
+				'teks' => $teks,
+				'unit' => $unit
+			];
 		} else {
 			$post = $this->input->post();
 			$unit = htmlspecialchars(trim($post['unit']));
@@ -46,32 +54,45 @@ class Unit extends MY_Controller {
 				$teks = 'Maintenance';
 				$unit = 'IPS';
 			}elseif( $unit=='2' and $aktifitas=='3' ){			// IT & Petugas
-				$data = $this->munit->cari($unit, $aktifitas);
+				$data = $this->munit->cari2($unit);
+				$data2 = '';
 				$hal = 'unit/it_petugas';
 				$teks = 'Petugas';
 				$unit = 'IT';
 			}elseif( $unit=='3' and $aktifitas=='3' ){			// IPS & Petugas
-				$data = $this->munit->cari($unit, $aktifitas);
+				$data = $this->munit->cari2($unit);
+				$data2 = '';
 				$hal = 'unit/it_petugas';
 				$teks = 'Petugas';
 				$unit = 'IPS';
 			}else{
 				$data = $this->munit->cari($unit, $aktifitas);
-				$hal = 'unit/index';
-				$teks = 'Perbaikan';
-				$unit = 'IT';
+				$hal = 'unit/nodisplay';
+				$teks = '-';
+				$unit = '-';
+			}
+
+			if( $unit=='2' or $unit=='3' and $aktifitas=='3'){
+				$data = [
+					'title' => 'Aktifitas Unit',
+					'hal' => $hal,
+					'units' => $this->munit->data(),
+					'datas' => $data,
+					'datas2' => $data2,
+					'teks' => $teks,
+					'unit' => $unit
+				];
+			}else{
+				$data = [
+					'title' => 'Aktifitas Unit',
+					'hal' => $hal,
+					'units' => $this->munit->data(),
+					'datas' => $data,
+					'teks' => $teks,
+					'unit' => $unit
+				];
 			}
 		}
-
-		$data = [
-			'title' => 'Aktifitas Unit',
-			'hal' => $hal,
-			'units' => $this->munit->data(),
-			'datas' => $data,
-			'teks' => $teks,
-			'unit' => $unit
-		];
-		
 		$this->load->view('layout', $data);
 	}
 
